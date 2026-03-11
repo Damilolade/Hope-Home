@@ -24,12 +24,13 @@ const Footer = () => {
         {/* Brand */}
         <div className="flex flex-col gap-3">
           <h2 className="font-bold text-xl tracking-tight">
-            <span className="text-indigo-400">Hope</span>
-            <span className="text-gray-500">_</span>
+            <span className="text-indigo-600">Hope</span>
+            <span className="text-green-600">_</span>
             <span className="text-white">Home</span>
           </h2>
           <p className="text-sm leading-relaxed">
-            Your trusted partner in finding the perfect home. We connect people with properties they'll love.
+            Your trusted partner in finding the perfect home. 
+            We connect people with properties they'll love.
           </p>
         </div>
 
@@ -71,13 +72,16 @@ const Footer = () => {
 
         {/* Social Media */}
         <div className="flex flex-col gap-3">
-          <h3 className="text-white font-semibold text-sm uppercase tracking-wider">Follow Us</h3>
+          <h3 className="text-white font-semibold 
+          text-sm uppercase tracking-wider">Follow Us</h3>
           <div className="flex items-center gap-3">
             {socials.map(({ icon: Icon, href }, i) => (
                 <a
                 key={i}
                 href={href}
-                className="w-9 h-9 flex items-center justify-center rounded-lg bg-gray-800 hover:bg-indigo-600 hover:text-white transition-all duration-200"
+                className="w-9 h-9 flex items-center justify-center 
+                rounded-lg bg-gray-800 hover:bg-indigo-600
+                 hover:text-white transition-all duration-200"
               >
                 <Icon size={16} />
               </a>
@@ -87,7 +91,7 @@ const Footer = () => {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-gray-800 py-4 text-center text-xs text-gray-600">
+      <div className="border-t border-gray-800 py-4 text-center text-xs text-indigo-600">
         © {new Date().getFullYear()} Hope_Home. All rights reserved.
       </div>
     </footer>

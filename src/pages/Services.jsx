@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import {
   Home, Star, Crown, Shield, Zap, Droplets, Trees, Camera,
-  CheckCircle, ArrowRight, Building2, MapPin, BadgeCheck
+  CheckCircle, ArrowRight, Building2, MapPin, BadgeCheck,
 } from 'lucide-react'
 
 const listings = [
@@ -24,7 +24,6 @@ const plans = [
   {
     id: 'gold',
     tier: 'Gold',
-    bedrooms: 1,
     badge: '1 Bedroom',
     deposit: 30000,
     icon: Star,
@@ -40,7 +39,6 @@ const plans = [
   {
     id: 'platinum',
     tier: 'Platinum',
-    bedrooms: 2,
     badge: '2 Bedroom',
     deposit: 40000,
     icon: BadgeCheck,
@@ -57,14 +55,13 @@ const plans = [
   {
     id: 'royal',
     tier: 'Royal',
-    bedrooms: 3,
     badge: '3 Bedroom',
     deposit: 50000,
     icon: Crown,
     accent: 'from-indigo-400 to-purple-500',
     border: 'border-indigo-400/30',
-    glow: 'shadow-indigo-600/20',
-    textAccent: 'text-indigo-600',
+    glow: 'shadow-indigo-400/20',
+    textAccent: 'text-indigo-400',
     bg: 'bg-indigo-500/10',
     features: ['3 Ensuite Bedrooms', 'Spacious Parlour', 'Guest Toilet', 'Modern Kitchen'],
     roomRate: 6400, roomYears: 6, roomTotal: 14016000,
@@ -73,6 +70,8 @@ const plans = [
 ]
 
 const fmt = (n) => '₦' + Number(n).toLocaleString('en-NG')
+
+// ── Animation hook ────────────────────────────────────────────────────────────
 
 const useFadeIn = (delay = 0) => {
   const ref = useRef(null)
@@ -96,6 +95,8 @@ const useFadeIn = (delay = 0) => {
   }, [delay])
   return ref
 }
+
+// ── InfraCard ─────────────────────────────────────────────────────────────────
 
 const InfraCard = ({ icon: Icon, label, index }) => {
   const ref = useRef(null)
@@ -121,11 +122,15 @@ const InfraCard = ({ icon: Icon, label, index }) => {
   return (
     <div
       ref={ref}
-      style={{ opacity: 0, transform: 'translateY(20px)', transition: 'opacity 0.5s ease, transform 0.5s ease' }}
-      className="flex items-center gap-3 bg-gray-800/50 border border-gray-700/50 rounded-xl p-4
-        hover:border-indigo-500/30 hover:bg-gray-800 hover:-translate-y-1 transition-all duration-300"
+      style={{ opacity: 0, transform: 'translateY(20px)', transition: 
+        'opacity 0.5s ease, transform 0.5s ease' }}
+      className="flex items-center gap-3 bg-gray-800/50 border
+       border-gray-700/50 rounded-xl p-4
+        hover:border-indigo-500/30 hover:bg-gray-800
+         hover:-translate-y-1 transition-all duration-300"
     >
-      <div className="w-9 h-9 flex items-center justify-center rounded-lg bg-indigo-500/10 text-indigo-400 shrink-0">
+      <div className="w-9 h-9 flex items-center justify-center 
+      rounded-lg bg-indigo-500/10 text-indigo-400 shrink-0">
         <Icon size={18} />
       </div>
       <span className="text-white text-sm font-medium">{label}</span>
@@ -133,9 +138,12 @@ const InfraCard = ({ icon: Icon, label, index }) => {
   )
 }
 
+// ── PlanCard ──────────────────────────────────────────────────────────────────
+
 const PlanCard = ({ plan, index, selectedListing }) => {
   const ref = useFadeIn(index * 150)
   const [tab, setTab] = useState('room')
+  const navigate = useNavigate()
   const Icon = plan.icon
 
   return (
@@ -151,7 +159,8 @@ const PlanCard = ({ plan, index, selectedListing }) => {
         hover:-translate-y-2 hover:shadow-2xl transition-all duration-300`}
     >
       {plan.popular && (
-        <div className="absolute top-4 right-4 bg-indigo-600 text-white text-xs font-bold px-3 py-1 rounded-full z-10">
+        <div className="absolute top-4 right-4 bg-indigo-600
+         text-white text-xs font-bold px-3 py-1 rounded-full z-10">
           Most Popular
         </div>
       )}
@@ -160,11 +169,13 @@ const PlanCard = ({ plan, index, selectedListing }) => {
 
       <div className={`p-6 ${plan.bg}`}>
         <div className="flex items-center gap-3 mb-3">
-          <div className={`w-10 h-10 rounded-xl flex items-center justify-center bg-gray-900 ${plan.textAccent}`}>
+          <div className={`w-10 h-10 rounded-xl flex items-center 
+            justify-center bg-gray-900 ${plan.textAccent}`}>
             <Icon size={20} />
           </div>
           <div>
-            <p className="text-black text-xs font-medium uppercase tracking-widest">{plan.badge}</p>
+            <p className="text-black text-xs font-medium uppercase 
+            tracking-widest">{plan.badge}</p>
             <h3 className={`text-xl font-extrabold ${plan.textAccent}`}>{plan.tier}</h3>
           </div>
         </div>
@@ -194,16 +205,21 @@ const PlanCard = ({ plan, index, selectedListing }) => {
 
       <div className="px-6 py-4 border-t border-gray-800 flex-1">
         <p className="text-black text-xs uppercase tracking-widest mb-3">Payment Plan</p>
-        <div className="flex rounded-lg overflow-hidden border border-gray-700 mb-4 text-sm font-medium">
+        <div className="flex rounded-lg overflow-hidden border
+         border-gray-700 mb-4 text-sm font-medium">
           <button
             onClick={() => setTab('room')}
-            className={`flex-1 py-2 transition-colors duration-200 ${tab === 'room' ? `bg-gradient-to-r ${plan.accent} text-gray-900` : 'bg-gray-800 text-white hover:text-white'}`}
+            className={`flex-1 py-2 transition-colors duration-200
+              ${tab === 'room' ? `bg-gradient-to-r ${plan.accent}
+               text-gray-900` : 'bg-gray-800 text-white hover:text-white'}`}
           >
             Room
           </button>
           <button
             onClick={() => setTab('infra')}
-            className={`flex-1 py-2 transition-colors duration-200 ${tab === 'infra' ? `bg-gradient-to-r ${plan.accent} text-gray-900` : 'bg-gray-800 text-white hover:text-white'}`}
+            className={`flex-1 py-2 transition-colors duration-200
+              ${tab === 'infra' ? `bg-gradient-to-r ${plan.accent}
+               text-gray-900` : 'bg-gray-800 text-white hover:text-white'}`}
           >
             Infrastructure
           </button>
@@ -219,7 +235,8 @@ const PlanCard = ({ plan, index, selectedListing }) => {
               <span className="text-black">Duration</span>
               <span className="text-white font-semibold">{plan.roomYears} Years</span>
             </div>
-            <div className={`flex justify-between text-sm font-bold mt-1 pt-2 border-t border-gray-700 ${plan.textAccent}`}>
+            <div className={`flex justify-between text-sm font-bold 
+              mt-1 pt-2 border-t border-gray-700 ${plan.textAccent}`}>
               <span>Total</span>
               <span>{fmt(plan.roomTotal)}</span>
             </div>
@@ -234,7 +251,8 @@ const PlanCard = ({ plan, index, selectedListing }) => {
               <span className="text-black">Duration</span>
               <span className="text-white font-semibold">{plan.infraYears} Years</span>
             </div>
-            <div className={`flex justify-between text-sm font-bold mt-1 pt-2 border-t border-gray-700 ${plan.textAccent}`}>
+            <div className={`flex justify-between text-sm 
+              font-bold mt-1 pt-2 border-t border-gray-700 ${plan.textAccent}`}>
               <span>Total</span>
               <span>{fmt(plan.infraTotal)}</span>
             </div>
@@ -243,18 +261,23 @@ const PlanCard = ({ plan, index, selectedListing }) => {
       </div>
 
       <div className="p-6 pt-0">
-        <Link
-          to="/contact"
-          className={`w-full flex items-center justify-center gap-2 py-3 rounded-xl font-semibold text-sm
-            bg-gradient-to-r ${plan.accent} text-gray-900 hover:opacity-90 hover:scale-[1.02]
+        <button
+          onClick={() => navigate('/subscribe', { state: 
+            { tier: plan.id, estate: selectedListing } })}
+          className={`w-full flex items-center justify-center 
+            gap-2 py-3 rounded-xl font-semibold text-sm
+            bg-gradient-to-r ${plan.accent} text-gray-900 
+            hover:opacity-90 hover:scale-[1.02]
             transition-all duration-200 shadow-lg`}
         >
-          Subscribe Now <ArrowRight size={16} />
-        </Link>
+          Start Now <ArrowRight size={16} />
+        </button>
       </div>
     </div>
   )
 }
+
+// ── Main Page ─────────────────────────────────────────────────────────────────
 
 const Services = () => {
   const [selectedListing, setSelectedListing] = useState(null)
@@ -267,31 +290,40 @@ const Services = () => {
       {/* Hero */}
       <section
         ref={heroRef}
-        style={{ opacity: 0, transform: 'translateY(30px) scale(1)', transition: 'opacity 0.7s ease, transform 0.7s ease' }}
+        style={{ opacity: 0, transform: 'translateY(30px) scale(1)', transition:
+           'opacity 0.7s ease, transform 0.7s ease' }}
         className="relative text-center py-16 px-4 overflow-hidden"
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-950 via-indigo-950/30 to-gray-950 -z-10" />
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[250px] bg-indigo-600/10 blur-3xl rounded-full -z-10" />
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-950
+         via-indigo-950/30 to-gray-950 -z-10" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 
+        w-[700px] h-[250px]
+         bg-indigo-600/10 blur-3xl rounded-full -z-10" />
 
-        <div className="inline-flex items-center gap-2 bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold px-4 py-2 rounded-full mb-4 uppercase tracking-widest">
+        <h1 className="inline-flex items-center gap-2
+         bg-indigo-500/10 border border-indigo-500/20
+          text-black text-xs font-semibold px-4 py-2 
+          rounded-full mb-4 uppercase tracking-widest">
           <Building2 size={14} /> Property Listings
-        </div>
+        </h1>
 
         <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4">
-          Find Your <span className="text-indigo-400">Dream</span> Home
+          Find <span cl>Your</span> <span className="text-black">Dream</span> Home
         </h1>
         <p className="text-black max-w-xl mx-auto text-lg mb-8">
           Choose from our premium apartment tiers across{' '}
-          <span className="text-white font-medium">BDR</span>,{' '}
+          <span className="text-green-600 font-medium">BDR</span>,{' '}
           <span className="text-white font-medium">Buckingham</span>, and{' '}
-          <span className="text-white font-medium">BHH</span> estates.
+          <span className="text-green-600 font-medium">BHH</span> estates.
         </p>
 
         <div className="flex flex-wrap justify-center gap-3">
           <button
             onClick={() => setSelectedListing(null)}
-            className={`px-5 py-2 rounded-xl text-sm font-semibold border transition-all duration-200
-              ${!selectedListing ? 'bg-indigo-600 border-indigo-500 text-white' : 'bg-gray-800 border-gray-700 text-white hover:border-gray-500'}`}
+            className={`px-5 py-2 rounded-xl text-sm font-semibold border 
+              transition-all duration-200
+              ${!selectedListing ? 'bg-indigo-600 border-indigo-500 text-white' :
+                 'bg-gray-800 border-gray-700 text-white hover:border-gray-500'}`}
           >
             All Estates
           </button>
@@ -322,13 +354,16 @@ const Services = () => {
       {/* Infrastructure */}
       <section
         ref={infraRef}
-        style={{ opacity: 0, transform: 'translateY(30px) scale(1)', transition: 'opacity 0.7s ease 0.2s, transform 0.7s ease 0.2s' }}
+        style={{ opacity: 0, transform: 
+          'translateY(30px) scale(1)', 
+          transition: 'opacity 0.7s ease 0.2s, transform 0.7s ease 0.2s' }}
         className="py-16 px-4 bg-gray-900/50"
       >
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-10">
             <h2 className="text-2xl sm:text-3xl font-bold mb-2">World-Class Infrastructure</h2>
-            <p className="text-black">Every estate comes with premium amenities included in your plan.</p>
+            <p className="text-black">Every estate comes with 
+              premium amenities included in your plan.</p>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
             {infrastructure.map(({ icon, label }, i) => (
@@ -342,7 +377,8 @@ const Services = () => {
       <section className="py-16 px-4">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-2xl sm:text-3xl font-bold text-center mb-2">Payment Summary</h2>
-          <p className="text-black text-center mb-8">Full breakdown of all apartment tiers and payment plans.</p>
+          <p className="text-black text-center mb-8">Full breakdown of all apartment tiers 
+            and payment plans.</p>
           <div className="rounded-2xl border border-gray-800 overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
@@ -359,7 +395,8 @@ const Services = () => {
                   {plans.map((p, i) => {
                     const Icon = p.icon
                     return (
-                      <tr key={p.id} className={`border-t border-gray-800 ${i % 2 === 0 ? 'bg-gray-900/40' : 'bg-gray-900/20'} hover:bg-gray-800/60 transition-colors`}>
+                      <tr key={p.id} className={`border-t border-gray-800 ${i % 2 === 0 ? 
+                      'bg-gray-900/40' : 'bg-gray-900/20'} hover:bg-gray-800/60 transition-colors`}>
                         <td className="px-5 py-4">
                           <div className="flex items-center gap-2">
                             <Icon size={16} className={p.textAccent} />
@@ -383,14 +420,17 @@ const Services = () => {
 
       {/* CTA */}
       <section className="py-16 px-4">
-        <div className="max-w-3xl mx-auto text-center bg-gradient-to-br from-indigo-900/40 to-gray-900 border border-indigo-500/20 rounded-3xl p-10
-          hover:border-indigo-500/40 hover:shadow-xl hover:shadow-indigo-500/10 transition-all duration-500">
+        <div className="max-w-3xl mx-auto text-center bg-gradient-to-br
+         from-indigo-900/40 to-gray-900 border border-indigo-500/20 rounded-3xl p-10
+          hover:border-indigo-500/40 hover:shadow-xl 
+          hover:shadow-indigo-500/10 transition-all duration-500">
           <CheckCircle size={40} className="text-indigo-400 mx-auto mb-4" />
           <h2 className="text-2xl sm:text-3xl font-bold mb-3">Ready to Subscribe?</h2>
           <p className="text-black mb-6">Contact our team to get started with your preferred apartment tier today.</p>
           <Link
             to="/contact"
-            className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-8 py-3 rounded-xl
+            className="inline-flex items-center gap-2 bg-indigo-600
+             hover:bg-indigo-500 text-white font-semibold px-8 py-3 rounded-xl
               transition-all duration-200 shadow-lg shadow-indigo-500/30 hover:scale-105"
           >
             Get In Touch <ArrowRight size={18} />

@@ -239,30 +239,37 @@ const Home = () => {
         style={{ opacity: 0, transform: 'translateY(30px)', transition: 'opacity 0.8s ease, transform 0.8s ease' }}
         className="relative text-center py-20 px-4 overflow-hidden"
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-indigo-950 via-gray-950 to-gray-900 -z-10" />
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-indigo-600/10 blur-3xl rounded-full -z-10" />
+        <div className="absolute inset-0 bg-gradient-to-br
+         from-indigo-950 via-gray-950 to-gray-900 -z-10" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px]
+         bg-indigo-600/10 blur-3xl rounded-full -z-10" />
 
-        <img src={logo} alt="Hope Home Logo" className="w-20 h-20 object-contain mx-auto mb-6 drop-shadow-xl
+        <img src={logo} alt="Hope Home Logo" 
+        className="w-20 h-20 object-contain mx-auto mb-6 drop-shadow-xl
           hover:scale-110 transition-transform duration-300" />
-
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight mb-4">
-          Welcome to{' '}
-          <span className="text-indigo-400">Hope</span>
-          <span className="text-gray-500">_</span>
-          <span className="text-white">Home</span>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold 
+          tracking-tight leading-tight mb-4">
+               Sack Your{' '}
+        <span className="text-indigo-400">Landlord —</span>{' '}
+        <span className="text-yellow-400">You Self</span>{' '}
+        <span className="text-white">Fit Buy House!</span>
         </h1>
-
         <p className="text-gray-400 text-lg sm:text-xl max-w-2xl mx-auto mb-8">
-          A smart real estate platform connecting <span className="text-white font-medium">Landlords</span>,{' '}
+          A smart real estate platform connecting 
+          <span className="text-white font-medium">Landlords</span>,{' '}
           <span className="text-yellow-400 font-medium">Realtors</span>, and{' '}
-          <span className="text-emerald-400 font-medium">Vendors</span> — with automated payments, live tracking, and instant document access.
+
+          <span className="text-emerald-400 font-medium">Vendors</span> — with automated 
+          payments, live tracking, and instant document access.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link
             to="/services"
-            className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-6 py-3 rounded-xl
-              transition-all duration-200 shadow-lg shadow-indigo-500/30 hover:scale-105 hover:shadow-indigo-500/50"
+            className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500
+             text-white font-semibold px-6 py-3 rounded-xl
+              transition-all duration-200 
+              shadow-lg shadow-indigo-500/30 hover:scale-105 hover:shadow-indigo-500/50"
           >
             Explore Services <ArrowRight size={18} />
           </Link>
@@ -279,13 +286,17 @@ const Home = () => {
       {/* Video Section */}
       <section
         ref={videoRef}
-        style={{ opacity: 0, transform: 'translateY(30px)', transition: 'opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s' }}
+        style={{ opacity: 0, transform: 'translateY(30px)', 
+          transition: 'opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s' }}
         className="py-16 px-4"
       >
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-2">See Hope_Home in Action</h2>
-          <p className="text-black text-center mb-8">Watch how we simplify real estate for everyone.</p>
-          <div className="rounded-2xl overflow-hidden border border-black shadow-2xl shadow-indigo-500/10
+          <h2 className="text-2xl sm:text-3xl text-black font-bold text-center mb-2">
+            See Hope_Home in Action</h2>
+          <p className="text-black text-center mb-8">Watch how we simplify 
+            real estate for everyone.</p>
+          <div className="rounded-2xl overflow-hidden border
+           border-black shadow-2xl shadow-indigo-500/10
             hover:shadow-indigo-500/30 hover:scale-[1.01] transition-all duration-500">
             <video
               src={ad}
@@ -305,7 +316,8 @@ const Home = () => {
       {/* Features Grid */}
       <section className="py-16 px-4">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-2">Everything You Need</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-2 text-black">Everything 
+            You Need</h2>
           <p className="text-black text-center mb-10">Built for every role in the property chain.</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {features.map((feature, i) => (
@@ -347,15 +359,19 @@ const Home = () => {
           ref={ctaRef}
           style={{ opacity: 0, transform: 'translateY(30px)', transition: 'opacity 0.8s ease 0.4s, transform 0.8s ease 0.4s' }}
           className="max-w-3xl mx-auto text-center
-            bg-gradient-to-br from-indigo-900/40 to-gray-900 border border-indigo-500/20 rounded-3xl p-10
-            hover:border-indigo-500/50 hover:shadow-xl hover:shadow-indigo-500/10 transition-all duration-500"
+            bg-gradient-to-br from-indigo-900/40 to-gray-900 border
+             border-indigo-500/20 rounded-3xl p-10
+            hover:border-indigo-500/50 hover:shadow-xl 
+            hover:shadow-indigo-500/10 transition-all duration-500"
         >
-          <CheckCircle size={40} className="text-black mx-auto mb-4 hover:scale-110 transition-transform duration-300" />
+          <CheckCircle size={40} className="text-black mx-auto mb-4 
+          hover:scale-110 transition-transform duration-300" />
           <h2 className="text-2xl sm:text-3xl font-bold mb-3">Ready to Get Started?</h2>
           <p className="text-black mb-6">Join landlords, realtors and vendors already using Hope_Home to simplify real estate transactions.</p>
           <Link
             to="/contact"
-            className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-8 py-3 rounded-xl
+            className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500
+             text-white font-semibold px-8 py-3 rounded-xl
               transition-all duration-200 shadow-lg shadow-indigo-500/30 hover:scale-105 hover:shadow-indigo-500/50"
           >
             Get In Touch <ArrowRight size={18} />
